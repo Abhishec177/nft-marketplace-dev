@@ -18,7 +18,7 @@ contract KryptoBird is ERC721Connector {
         // uint _id =  KryptoBirdz.push(_kryptoBird);
 
         kryptoBirdz.push(_kryptoBird);
-        uint _id = kryptoBirdz .length - 1;
+        uint _id = kryptoBirdz.length - 1;
 
         _mint(msg.sender, _id);
         _kryptoBirdzExists[_kryptoBird] = true;
