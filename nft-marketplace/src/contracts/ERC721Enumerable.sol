@@ -2,8 +2,9 @@
 pragma solidity ^0.8.0;
 
 import './ERC721.sol';
+import './interfaces/IERC721Enumerable.sol';
 
-contract ERC721Enumerable is ERC721 {
+contract ERC721Enumerable is ERC721, IERC721Enumerable {
 
     uint256[] private _allTokens;
 
@@ -47,20 +48,20 @@ contract ERC721Enumerable is ERC721 {
     //1. function that returns tokenByIndex
     //2. function that returns tokenOfOwnerByIndex
 
-    function tokenByIndex(uint256 index) public view returns(uint256) {
+    function tokenByIndex(uint256 index) public view override returns(uint256) {
         //make sure index is not out of bounds of the total supply
         require(index < totalSupply(),"global index is out of bounds!");
         return _allTokens[index];
     }
 
-    function tokenOfOwnerByIndex(address owner, uint index) public view returns(uint256) {
+    function tokenOfOwnerByIndex(address owner, uint index) public view override returns(uint256) {
         require(index < balanceOf(owner),"owner index is out of bounds!");
         return _ownedTokens[owner][index];
     }
 
 
     // return the total supply of _allTOkens array
-    function totalSupply() public view returns(uint256) {
+    function totalSupply() public view override returns(uint256) {
         return _allTokens.length;
     }
 
