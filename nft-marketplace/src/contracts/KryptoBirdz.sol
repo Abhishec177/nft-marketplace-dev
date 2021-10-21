@@ -14,7 +14,7 @@ contract KryptoBird is ERC721Connector {
 
         require(!_kryptoBirdzExists[_kryptoBird],'Error: KryptoBird already exists'); 
         
-        // .push is depricated
+        // .push is depricated & will not return length value anymore
         // uint _id =  KryptoBirdz.push(_kryptoBird);
 
         kryptoBirdz.push(_kryptoBird);

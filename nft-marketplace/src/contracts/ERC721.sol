@@ -14,10 +14,19 @@ contract ERC721 {
     event Transfer(
         address indexed from, 
         address indexed to, 
-        uint256 indexed tokenId);
+        uint256 indexed tokenId
+    );
+
+    // event Approval(
+    //     address indexed owner,
+    //     address indexed approved,
+    //     uint256 indexed tokenId
+    // );
 
     mapping(uint256 => address) private _tokenOwner;
     mapping(address => uint256) private _ownedTokensCount;
+
+    mapping(uint256 => address) private _tokenApprovals;
 
 
     function balanceOf(address _owner) public view returns(uint256) {
@@ -25,14 +34,14 @@ contract ERC721 {
         return _ownedTokensCount[_owner];
     }
 
-    function ownerOf(uint256 _tokenId) external view returns (address) {
+    function ownerOf(uint256 _tokenId) public view returns (address) {
         address owner = _tokenOwner[_tokenId];
         require(owner != address(0),'owner query for non-existent token');
         return owner;
     }
 
 
-    //checks whether or not if the toekn already exists and is owned by another user
+    //checks whether or not if the token already exists and is owned by another user
     function _exists(uint256 tokenId) internal view returns(bool) {
         address owner = _tokenOwner[tokenId];
         return owner != address(0);
@@ -48,4 +57,22 @@ contract ERC721 {
         emit Transfer(address(0), to, tokenId);
     }
 
+    // //1. Require that the person approving is the owner
+    // //2. We are approving an address to a token (tokenId)
+    // //3. require that we can't approve sending tokens of the owner 
+    // //4. update the map of the approval addresses
+    
+    // function approve(address _to, uint256 tokenId) public {
+    //     address owner = ownerOf(tokenId);
+    //     require(_to != owner,"Error - approval to current owner");
+    //     require(msg.sender == owner, "Cuurent caller is not the owner of the token.");
+    //     _tokenApprovals[tokenId] = _to;
+    //     emit Approval(owner, _to, tokenId);
+    // }
+
+    // function isApprovedOrOwner(address spender, uint256 tokenId) internal view returns(bool) {
+    //     require(_exists(tokenId), "token does not exist");
+    //     address owner = ownerOf(tokenId);
+    //     return (spender == owner );
+    // }
 }
