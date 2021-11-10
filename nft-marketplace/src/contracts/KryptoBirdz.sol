@@ -24,7 +24,7 @@ contract KryptoBird is ERC721Connector {
         _kryptoBirdzExists[_kryptoBird] = true;
     }
     
-    constructor() ERC721Connector('kryptoBird','KBIRDZ') {
+    constructor() ERC721Connector('KryptoBird','KBIRDZ') {
 
     }
 }
